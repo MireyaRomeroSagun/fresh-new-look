@@ -147,7 +147,7 @@ const HRSidebar = ({ collapsed, onToggle }: HRSidebarProps) => {
               <div key={group.key}>
                 <button
                   onClick={() => enabled && navigate(item.href)}
-                  className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+                  className={`relative flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
                     location.pathname === item.href
                       ? "bg-sidebar-primary text-sidebar-primary-foreground"
                       : enabled
