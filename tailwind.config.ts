@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Cormorant Garamond", "serif"],
-        body: ["Source Serif 4", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["IBM Plex Sans", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,6 +61,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        info: "hsl(var(--info))",
+        toolbar: {
+          DEFAULT: "hsl(var(--toolbar-bg))",
+          foreground: "hsl(var(--toolbar-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,15 +83,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(12px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.6s ease-out forwards",
       },
     },
   },
