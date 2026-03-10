@@ -1,8 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 
+export interface SubMenuItem {
+  label?: string;
+  href?: string;
+  separator?: boolean;
+}
+
 export interface MenuItemDef {
   label: string;
-  items?: { label: string; href?: string; separator?: boolean }[];
+  items?: SubMenuItem[];
   badge?: string;
   badgeType?: "alert" | "info";
   href?: string;
