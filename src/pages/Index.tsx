@@ -1,128 +1,232 @@
-import Navbar from "@/components/Navbar";
-import StoryCard from "@/components/StoryCard";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import MenuBar, { type MenuItemDef } from "@/components/MenuBar";
+import StatusBar from "@/components/StatusBar";
+import { Building2, Target, TrendingUp, Users, ShieldCheck, Award } from "lucide-react";
 
-const stories = [
+const menus: MenuItemDef[] = [
   {
-    title: "La casa donde terminan los caminos",
-    author: "Elena Vásquez",
-    monogram: "EV",
-    excerpt: "Nadie recordaba cuándo había aparecido la casa al final de la calle empedrada. Estaba ahí, como siempre habían estado los cerros y el río, como si la tierra misma la hubiera empujado hacia arriba.",
-    readTime: "12 min de lectura",
+    label: "41 Pending Revalidation",
+    badge: "●",
+    badgeType: "alert",
+    items: [],
   },
   {
-    title: "Ceniza y sal",
-    author: "Rodrigo Amézquita",
-    monogram: "RA",
-    excerpt: "El mar devolvió el cuerpo tres días después, cubierto de algas y con los bolsillos llenos de piedras blancas.",
-    readTime: "8 min de lectura",
+    label: "Trainings",
+    items: [
+      { label: "Training Sessions" },
+      { label: "Trainings Browser" },
+      { label: "Training Internal" },
+      { separator: true },
+      { label: "Trainings by Users" },
+      { label: "Trainings by job positions" },
+      { separator: true },
+      { label: "Training Reports" },
+    ],
   },
   {
-    title: "El relojero de Berlín",
-    author: "Marta Estrada",
-    monogram: "ME",
-    excerpt: "Herr Kaufmann no reparaba relojes. Los escuchaba. Ponía cada mecanismo contra su oído izquierdo —el derecho lo había perdido en Stalingrado— y diagnosticaba sus males como un médico ausculta un pecho enfermo.",
-    readTime: "22 min de lectura",
+    label: "Employment History",
+    items: [
+      { label: "Employee Records" },
+      { label: "Position History" },
+      { label: "Salary History" },
+      { label: "Department Transfers" },
+    ],
   },
   {
-    title: "Territorio de lobos",
-    author: "Santiago Herrera",
-    monogram: "SH",
-    readTime: "15 min de lectura",
+    label: "Induction",
+    items: [
+      { label: "New Hire Onboarding" },
+      { label: "Induction Checklist" },
+      { label: "Induction Reports" },
+    ],
   },
   {
-    title: "Las manos del pianista",
-    author: "Clara Domínguez",
-    monogram: "CD",
-    excerpt: "Tocaba con los ojos cerrados, no por virtuosismo sino por vergüenza. Sus manos, enormes y callosas de albañil, parecían un insulto sobre las teclas de marfil.",
-    readTime: "10 min de lectura",
+    label: "Evaluations",
+    items: [
+      { label: "Performance Evaluations" },
+      { label: "360° Evaluations" },
+      { label: "Evaluation Templates" },
+      { label: "Evaluation Reports" },
+    ],
   },
   {
-    title: "Instrucciones para desaparecer",
-    author: "Julián Restrepo",
-    monogram: "JR",
-    readTime: "6 min de lectura",
+    label: "Efficiencies",
+    items: [
+      { label: "Efficiency Tracking" },
+      { label: "Productivity Reports" },
+      { label: "Attendance Summary" },
+    ],
+  },
+  {
+    label: "Support Modules",
+    items: [
+      { label: "Document Management" },
+      { label: "Request Forms" },
+      { label: "Help Desk" },
+    ],
+  },
+  {
+    label: "Catalogs",
+    items: [
+      { label: "Departments" },
+      { label: "Positions" },
+      { label: "Locations" },
+      { label: "Cost Centers" },
+    ],
+  },
+  {
+    label: "Loans",
+    items: [
+      { label: "Active Loans" },
+      { label: "Loan Requests" },
+      { label: "Loan Reports" },
+    ],
+  },
+  {
+    label: "Competencies",
+    items: [
+      { label: "Competency Matrix" },
+      { label: "Skills Assessment" },
+      { label: "Gap Analysis" },
+    ],
+  },
+  {
+    label: "Persal Rewards",
+    badge: "(2)",
+    badgeType: "info",
+    items: [
+      { label: "Reward Programs" },
+      { label: "Points Summary" },
+      { label: "Redeem Rewards" },
+    ],
+  },
+  {
+    label: "Safety",
+    items: [
+      { label: "Incident Reports" },
+      { label: "Safety Training" },
+      { label: "OSHA Compliance" },
+      { label: "Safety Audits" },
+    ],
+  },
+  {
+    label: "Others",
+    items: [
+      { label: "System Settings" },
+      { label: "User Management" },
+      { label: "Audit Log" },
+    ],
+  },
+  {
+    label: "Windows",
+    items: [
+      { label: "Cascade" },
+      { label: "Tile Horizontally" },
+      { label: "Tile Vertically" },
+      { separator: true },
+      { label: "Close All" },
+    ],
   },
 ];
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="flex h-screen flex-col bg-background">
+      {/* Menu */}
+      <MenuBar
+        menus={menus}
+        title="Automated Production System (APS): HR (User: mromero / DB: PERSAL) TRESS: GRUPO INDUSTRIAL PERSAL"
+      />
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="container max-w-4xl">
-          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl font-semibold text-foreground leading-[0.95] mb-8 animate-fade-in">
-            Un santuario<br />
-            para la palabra<br />
-            <span className="text-primary">escrita</span>
-          </h1>
-          <p className="font-body text-lg text-secondary max-w-lg leading-relaxed mb-10 animate-fade-in" style={{ animationDelay: "0.15s" }}>
-            Lee y escribe ficción sin distracciones. Cada historia merece tu atención completa.
-          </p>
-          <div className="flex gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Button variant="default" size="lg" className="font-heading text-base tracking-wide">
-              Comenzar a leer
-              <ArrowRight size={16} />
-            </Button>
-            <Button variant="outline" size="lg" className="font-heading text-base tracking-wide">
-              Escribir una historia
-            </Button>
+      {/* Main content area */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left side - Logo area */}
+        <div className="flex w-1/2 flex-col items-center justify-center p-8">
+          <div className="flex flex-col items-center gap-4">
+            {/* Stylized logo using CSS */}
+            <div className="flex items-end gap-1">
+              <div className="h-32 w-14 bg-primary rounded-t-sm" />
+              <div className="h-24 w-10 bg-secondary rounded-t-sm" />
+              <div className="h-32 w-10 bg-muted-foreground/40 rounded-t-sm" />
+              <div className="h-24 w-14 bg-primary rounded-t-sm" />
+            </div>
+            <div className="mt-2 text-center">
+              <h1 className="text-4xl font-bold tracking-wider text-foreground">
+                <span className="text-primary">P</span>ERSAL
+              </h1>
+              <p className="mt-1 text-sm tracking-[0.35em] text-muted-foreground font-medium">
+                MANUFACTURING SOLUTIONS
+              </p>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Divider */}
-      <div className="container">
-        <div className="border-t border-border" />
+        {/* Right side - HR Info */}
+        <div className="flex w-1/2 flex-col gap-6 overflow-y-auto p-8">
+          <h2 className="text-center font-bold italic text-3xl text-foreground tracking-wide">
+            HUMAN RESOURCES
+          </h2>
+
+          {/* Política de Calidad */}
+          <div className="border border-border bg-card shadow-sm">
+            <div className="section-header">Política de Calidad</div>
+            <div className="p-5 text-card-foreground leading-relaxed text-[15px]" style={{ textAlign: "justify" }}>
+              En Persal, nuestro compromiso es la total satisfacción de nuestros clientes externos e
+              internos a través de la mejora continua de nuestros procesos y colaboración de nuestro
+              personal.
+            </div>
+          </div>
+
+          {/* Objetivos de Calidad */}
+          <div className="border border-border bg-card shadow-sm">
+            <div className="section-header">Objetivos de Calidad</div>
+            <div className="p-5 space-y-2 text-card-foreground text-[15px]">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <Users size={16} className="text-muted-foreground" />
+                  Porcentaje de aceptación de Clientes:
+                </span>
+                <span className="kpi-value text-lg">98.6%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <TrendingUp size={16} className="text-muted-foreground" />
+                  Cumplimiento Entregas a Tiempo:
+                </span>
+                <span className="kpi-value text-lg">98.6%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-muted-foreground" />
+                  Índice de Accidente Anual OSHA:
+                </span>
+                <span className="kpi-value text-lg">7</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
+              <Users size={20} className="text-primary" />
+              <span className="text-2xl font-bold text-foreground">191</span>
+              <span className="text-xs text-muted-foreground">Empleados Activos</span>
+            </div>
+            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
+              <Award size={20} className="text-primary" />
+              <span className="text-2xl font-bold text-foreground">12</span>
+              <span className="text-xs text-muted-foreground">Capacitaciones</span>
+            </div>
+            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
+              <Target size={20} className="text-primary" />
+              <span className="text-2xl font-bold text-foreground">96%</span>
+              <span className="text-xs text-muted-foreground">Eficiencia</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Featured Stories - Asymmetric Grid */}
-      <section className="py-20 px-6" id="explorar">
-        <div className="container max-w-6xl">
-          <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-foreground mb-2">
-            Historias recientes
-          </h2>
-          <p className="text-muted-foreground mb-12">Descubre lo que otros han escrito.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Large card */}
-            <div className="md:col-span-7">
-              <StoryCard {...stories[0]} variant="large" className="h-full" />
-            </div>
-            <div className="md:col-span-5 flex flex-col gap-6">
-              <StoryCard {...stories[1]} variant="medium" />
-              <StoryCard {...stories[3]} variant="small" />
-            </div>
-
-            <div className="md:col-span-5">
-              <StoryCard {...stories[2]} variant="medium" className="h-full" />
-            </div>
-            <div className="md:col-span-4">
-              <StoryCard {...stories[4]} variant="medium" className="h-full" />
-            </div>
-            <div className="md:col-span-3">
-              <StoryCard {...stories[5]} variant="small" className="h-full" />
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <Button variant="outline" size="lg" className="font-heading text-base tracking-wide">
-              Cargar más historias
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
-        <div className="container max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="font-heading text-xl text-foreground">El Umbral</span>
-          <p className="text-sm text-muted-foreground">Un espacio para la ficción. Sin distracciones. Sin ruido.</p>
-        </div>
-      </footer>
+      {/* Status bar */}
+      <StatusBar message="Updating Users  Total items transferred: 191" version="Vers. 1.0.0.657" />
     </div>
   );
 };
