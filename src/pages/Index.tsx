@@ -1,232 +1,212 @@
-import MenuBar, { type MenuItemDef } from "@/components/MenuBar";
-import StatusBar from "@/components/StatusBar";
-import { Building2, Target, TrendingUp, Users, ShieldCheck, Award } from "lucide-react";
+import { useState } from "react";
+import HRSidebar from "@/components/HRSidebar";
+import KpiCard from "@/components/KpiCard";
+import {
+  Users,
+  TrendingUp,
+  ShieldCheck,
+  GraduationCap,
+  Award,
+  Target,
+  Bell,
+  Search,
+  Calendar,
+  ArrowUpRight,
+  Clock,
+  AlertTriangle,
+  CheckCircle2,
+  UserCheck,
+} from "lucide-react";
 
-const menus: MenuItemDef[] = [
-  {
-    label: "41 Pending Revalidation",
-    badge: "●",
-    badgeType: "alert",
-    items: [],
-  },
-  {
-    label: "Trainings",
-    items: [
-      { label: "Training Sessions" },
-      { label: "Trainings Browser" },
-      { label: "Training Internal" },
-      { separator: true },
-      { label: "Trainings by Users" },
-      { label: "Trainings by job positions" },
-      { separator: true },
-      { label: "Training Reports" },
-    ],
-  },
-  {
-    label: "Employment History",
-    items: [
-      { label: "Employee Records" },
-      { label: "Position History" },
-      { label: "Salary History" },
-      { label: "Department Transfers" },
-    ],
-  },
-  {
-    label: "Induction",
-    items: [
-      { label: "New Hire Onboarding" },
-      { label: "Induction Checklist" },
-      { label: "Induction Reports" },
-    ],
-  },
-  {
-    label: "Evaluations",
-    items: [
-      { label: "Performance Evaluations" },
-      { label: "360° Evaluations" },
-      { label: "Evaluation Templates" },
-      { label: "Evaluation Reports" },
-    ],
-  },
-  {
-    label: "Efficiencies",
-    items: [
-      { label: "Efficiency Tracking" },
-      { label: "Productivity Reports" },
-      { label: "Attendance Summary" },
-    ],
-  },
-  {
-    label: "Support Modules",
-    items: [
-      { label: "Document Management" },
-      { label: "Request Forms" },
-      { label: "Help Desk" },
-    ],
-  },
-  {
-    label: "Catalogs",
-    items: [
-      { label: "Departments" },
-      { label: "Positions" },
-      { label: "Locations" },
-      { label: "Cost Centers" },
-    ],
-  },
-  {
-    label: "Loans",
-    items: [
-      { label: "Active Loans" },
-      { label: "Loan Requests" },
-      { label: "Loan Reports" },
-    ],
-  },
-  {
-    label: "Competencies",
-    items: [
-      { label: "Competency Matrix" },
-      { label: "Skills Assessment" },
-      { label: "Gap Analysis" },
-    ],
-  },
-  {
-    label: "Persal Rewards",
-    badge: "(2)",
-    badgeType: "info",
-    items: [
-      { label: "Reward Programs" },
-      { label: "Points Summary" },
-      { label: "Redeem Rewards" },
-    ],
-  },
-  {
-    label: "Safety",
-    items: [
-      { label: "Incident Reports" },
-      { label: "Safety Training" },
-      { label: "OSHA Compliance" },
-      { label: "Safety Audits" },
-    ],
-  },
-  {
-    label: "Others",
-    items: [
-      { label: "System Settings" },
-      { label: "User Management" },
-      { label: "Audit Log" },
-    ],
-  },
-  {
-    label: "Windows",
-    items: [
-      { label: "Cascade" },
-      { label: "Tile Horizontally" },
-      { label: "Tile Vertically" },
-      { separator: true },
-      { label: "Close All" },
-    ],
-  },
+const recentActivities = [
+  { icon: UserCheck, label: "Juan Pérez completó inducción", time: "Hace 12 min", color: "text-success" },
+  { icon: GraduationCap, label: "Capacitación ISO 9001 programada", time: "Hace 1 hora", color: "text-info" },
+  { icon: AlertTriangle, label: "41 revalidaciones pendientes", time: "Hace 2 horas", color: "text-warning" },
+  { icon: CheckCircle2, label: "Evaluación 360° de Dic completada", time: "Hace 3 horas", color: "text-success" },
+  { icon: Award, label: "María López recibió reconocimiento", time: "Ayer", color: "text-primary" },
 ];
 
+const pendingTasks = [
+  { label: "Revalidaciones de capacitación", count: 41, urgency: "high" as const },
+  { label: "Evaluaciones por revisar", count: 8, urgency: "medium" as const },
+  { label: "Solicitudes de préstamo", count: 3, urgency: "low" as const },
+  { label: "Incidentes sin cerrar", count: 2, urgency: "high" as const },
+];
+
+const urgencyStyles = {
+  high: "bg-destructive/10 text-destructive",
+  medium: "bg-warning/10 text-warning",
+  low: "bg-info/10 text-info",
+};
+
 const Index = () => {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   return (
-    <div className="flex h-screen flex-col bg-background">
-      {/* Menu */}
-      <MenuBar
-        menus={menus}
-        title="Automated Production System (APS): HR (User: mromero / DB: PERSAL) TRESS: GRUPO INDUSTRIAL PERSAL"
-      />
+    <div className="flex h-screen overflow-hidden bg-background">
+      <HRSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
 
-      {/* Main content area */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left side - Logo area */}
-        <div className="flex w-1/2 flex-col items-center justify-center p-8">
-          <div className="flex flex-col items-center gap-4">
-            {/* Stylized logo using CSS */}
-            <div className="flex items-end gap-1">
-              <div className="h-32 w-14 bg-primary rounded-t-sm" />
-              <div className="h-24 w-10 bg-secondary rounded-t-sm" />
-              <div className="h-32 w-10 bg-muted-foreground/40 rounded-t-sm" />
-              <div className="h-24 w-14 bg-primary rounded-t-sm" />
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Top bar */}
+        <header className="flex h-16 items-center justify-between border-b border-border bg-card px-6 shadow-sm">
+          <div className="flex items-center gap-3">
+            <h1 className="text-lg font-semibold text-foreground">Dashboard</h1>
+            <span className="text-sm text-muted-foreground hidden sm:inline">
+              Grupo Industrial Persal
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="relative hidden md:block">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Buscar empleados, capacitaciones..."
+                className="h-9 w-72 rounded-lg bg-secondary pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-ring transition-shadow"
+              />
             </div>
-            <div className="mt-2 text-center">
-              <h1 className="text-4xl font-bold tracking-wider text-foreground">
-                <span className="text-primary">P</span>ERSAL
-              </h1>
-              <p className="mt-1 text-sm tracking-[0.35em] text-muted-foreground font-medium">
-                MANUFACTURING SOLUTIONS
+            <button className="relative flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary transition-colors">
+              <Bell size={18} />
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground">
+                3
+              </span>
+            </button>
+            <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-1.5">
+              <Calendar size={14} className="text-muted-foreground" />
+              <span className="text-xs font-medium text-foreground">
+                {new Date().toLocaleDateString("es-MX", { day: "numeric", month: "short", year: "numeric" })}
+              </span>
+            </div>
+          </div>
+        </header>
+
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto p-6">
+          {/* Welcome */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-foreground">
+              Buen día, M. Romero 👋
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Aquí tienes el resumen de Recursos Humanos de hoy.
+            </p>
+          </div>
+
+          {/* KPI Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <KpiCard
+              label="Empleados Activos"
+              value="191"
+              change="+3 este mes"
+              changeType="positive"
+              icon={<Users size={20} />}
+              color="primary"
+            />
+            <KpiCard
+              label="Aceptación Clientes"
+              value="98.6%"
+              change="+0.2% vs mes anterior"
+              changeType="positive"
+              icon={<TrendingUp size={20} />}
+              color="success"
+            />
+            <KpiCard
+              label="Entregas a Tiempo"
+              value="98.6%"
+              change="Meta: 97%"
+              changeType="positive"
+              icon={<Target size={20} />}
+              color="info"
+            />
+            <KpiCard
+              label="Índice OSHA"
+              value="7"
+              change="-2 vs año anterior"
+              changeType="positive"
+              icon={<ShieldCheck size={20} />}
+              color="warning"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Quality Policy */}
+            <div className="lg:col-span-2 rounded-xl bg-card border border-border p-6 shadow-sm">
+              <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Award size={18} className="text-primary" />
+                Política de Calidad
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed" style={{ textAlign: "justify" }}>
+                En Persal, nuestro compromiso es la total satisfacción de nuestros clientes externos e
+                internos a través de la mejora continua de nuestros procesos y colaboración de nuestro
+                personal.
               </p>
-            </div>
-          </div>
-        </div>
 
-        {/* Right side - HR Info */}
-        <div className="flex w-1/2 flex-col gap-6 overflow-y-auto p-8">
-          <h2 className="text-center font-bold italic text-3xl text-foreground tracking-wide">
-            HUMAN RESOURCES
-          </h2>
-
-          {/* Política de Calidad */}
-          <div className="border border-border bg-card shadow-sm">
-            <div className="section-header">Política de Calidad</div>
-            <div className="p-5 text-card-foreground leading-relaxed text-[15px]" style={{ textAlign: "justify" }}>
-              En Persal, nuestro compromiso es la total satisfacción de nuestros clientes externos e
-              internos a través de la mejora continua de nuestros procesos y colaboración de nuestro
-              personal.
-            </div>
-          </div>
-
-          {/* Objetivos de Calidad */}
-          <div className="border border-border bg-card shadow-sm">
-            <div className="section-header">Objetivos de Calidad</div>
-            <div className="p-5 space-y-2 text-card-foreground text-[15px]">
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <Users size={16} className="text-muted-foreground" />
-                  Porcentaje de aceptación de Clientes:
-                </span>
-                <span className="kpi-value text-lg">98.6%</span>
+              <div className="mt-6 grid grid-cols-3 gap-4">
+                <div className="rounded-lg bg-primary/5 border border-primary/10 p-4 text-center">
+                  <p className="text-2xl font-bold text-primary">98.6%</p>
+                  <p className="text-xs text-muted-foreground mt-1">Aceptación Clientes</p>
+                </div>
+                <div className="rounded-lg bg-success/5 border border-success/10 p-4 text-center">
+                  <p className="text-2xl font-bold text-success">98.6%</p>
+                  <p className="text-xs text-muted-foreground mt-1">Entregas a Tiempo</p>
+                </div>
+                <div className="rounded-lg bg-info/5 border border-info/10 p-4 text-center">
+                  <p className="text-2xl font-bold text-info">7</p>
+                  <p className="text-xs text-muted-foreground mt-1">Índice OSHA</p>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <TrendingUp size={16} className="text-muted-foreground" />
-                  Cumplimiento Entregas a Tiempo:
-                </span>
-                <span className="kpi-value text-lg">98.6%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-muted-foreground" />
-                  Índice de Accidente Anual OSHA:
-                </span>
-                <span className="kpi-value text-lg">7</span>
+            </div>
+
+            {/* Pending Tasks */}
+            <div className="rounded-xl bg-card border border-border p-6 shadow-sm">
+              <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Clock size={18} className="text-primary" />
+                Pendientes
+              </h3>
+              <div className="space-y-3">
+                {pendingTasks.map((task, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between rounded-lg bg-secondary/50 px-4 py-3 hover:bg-secondary transition-colors cursor-pointer group"
+                  >
+                    <span className="text-sm text-foreground">{task.label}</span>
+                    <div className="flex items-center gap-2">
+                      <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${urgencyStyles[task.urgency]}`}>
+                        {task.count}
+                      </span>
+                      <ArrowUpRight size={14} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
-              <Users size={20} className="text-primary" />
-              <span className="text-2xl font-bold text-foreground">191</span>
-              <span className="text-xs text-muted-foreground">Empleados Activos</span>
-            </div>
-            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
-              <Award size={20} className="text-primary" />
-              <span className="text-2xl font-bold text-foreground">12</span>
-              <span className="text-xs text-muted-foreground">Capacitaciones</span>
-            </div>
-            <div className="flex flex-col items-center gap-1 rounded border border-border bg-card p-4 shadow-sm">
-              <Target size={20} className="text-primary" />
-              <span className="text-2xl font-bold text-foreground">96%</span>
-              <span className="text-xs text-muted-foreground">Eficiencia</span>
+          {/* Recent Activity */}
+          <div className="mt-6 rounded-xl bg-card border border-border p-6 shadow-sm">
+            <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Bell size={18} className="text-primary" />
+              Actividad Reciente
+            </h3>
+            <div className="space-y-1">
+              {recentActivities.map((activity, i) => {
+                const Icon = activity.icon;
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 rounded-lg px-4 py-3 hover:bg-secondary/50 transition-colors cursor-pointer"
+                  >
+                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary ${activity.color}`}>
+                      <Icon size={16} />
+                    </div>
+                    <span className="flex-1 text-sm text-foreground">{activity.label}</span>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{activity.time}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
+        </main>
       </div>
-
-      {/* Status bar */}
-      <StatusBar message="Updating Users  Total items transferred: 191" version="Vers. 1.0.0.657" />
     </div>
   );
 };
